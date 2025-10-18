@@ -1,0 +1,12 @@
+{
+    "name": "root/php-bot",
+    "autoload": {
+        "psr-4": {
+            "Root\\PhpBot\\": "src/"
+        }
+    },
+    "require": {
+        "guzzlehttp/guzzle": "^7.10",
+        "vlucas/phpdotenv": "^5.6"
+    }
+}
