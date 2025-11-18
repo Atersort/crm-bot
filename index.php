@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_URI'] === "/") {
 
     if ($receivedToken === null || $secretToken !== $receivedToken) {
         http_response_code(403);
-        echo "Error: Access Forbidden";
+        echo "Error: Доступ запрещён";
         exit;
     }
 
@@ -33,6 +33,7 @@ if ($_SERVER['REQUEST_URI'] === "/") {
     );
 
     $data = json_decode($requestBody, true);
+    var_dump($data);
 
     if (empty($data)) {
         http_response_code(400);
@@ -44,7 +45,6 @@ if ($_SERVER['REQUEST_URI'] === "/") {
     $messageText = match ($event) {
         'task_updated' => "🔥 **Обновлена задача**: #{$data['task_id']} - {$data['title']}",
         default => "получено неизвестное событие:" . $event,
-
     };
 
     try {
