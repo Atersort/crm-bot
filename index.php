@@ -7,8 +7,6 @@ require __DIR__ . '/vendor/autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
-$botToken = $_ENV['BOT_TOKEN'];
-$chatId = $_ENV['TELEGRAM_CHAT_ID'];
 $secretToken = $_ENV['CRM_SECRET_TOKEN'];
 $receivedToken = $_GET['token'] ?? null;
 
@@ -32,37 +30,11 @@ if ($_SERVER['REQUEST_URI'] === "/") {
         FILE_APPEND
     );
 
-    $data = json_decode($requestBody, true);
-    var_dump($data);
+    $handler = new \App\Handlers\CrmHandler($requestBody);
+    $telegram = new \App\Services\TelegramService();
+    $messageText = $handler->handle();
+    $telegram->sendMessage($messageText);
 
-    if (empty($data)) {
-        http_response_code(400);
-        echo "Error: Empty message";
-        exit;
-    }
-
-    $event = $data['event'];
-    $messageText = match ($event) {
-        'task_updated' => "🔥 **Обновлена задача**: #{$data['task_id']} - {$data['title']}",
-        default => "получено неизвестное событие:" . $event,
-    };
-
-    try {
-        $client = new GuzzleHttp\Client();
-        $response = $client->post('https://api.telegram.org/bot' . $botToken . '/sendMessage', [
-            'form_params' => [
-                'chat_id' => $chatId,
-                'text' => $messageText,
-                'parse_mode' => 'Markdown',
-            ]
-        ]);
-    } catch (GuzzleException $e) {
-        file_put_contents(
-            __DIR__ . '/logs/crm.log',
-            $e->getMessage() . PHP_EOL . "\n",
-            FILE_APPEND
-        );
-    }
 
     echo "OK\n";
 } else {

@@ -17,7 +17,7 @@ public string $token;
 public function __construct() {
     $this->client = new Client();
     $this->chatId = $_ENV['TELEGRAM_CHAT_ID'];
-    $this->token = $_ENV['TELEGRAM_TOKEN'];
+    $this->token = $_ENV['BOT_TOKEN'];
 }
 
 public function sendMessage(string $message) {
@@ -26,6 +26,7 @@ public function sendMessage(string $message) {
             'form_params' => [
                 'chat_id' => $this->chatId,
                 'text' => $message,
+                'parse_mode' => 'Markdown'
             ]
         ]);
     } catch (GuzzleException $e) {
