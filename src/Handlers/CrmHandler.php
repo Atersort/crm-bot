@@ -16,20 +16,19 @@ class CrmHandler
     {
         if (empty($this->data['current'])) {
             http_response_code(400);
-            echo 'Current not set';
-            exit;
+            return "Ошибка: пустые данные";
         }
 
         $id = $this->data['current']['id'];
         $name = $this->data['current']['name'];
 
         $event = $this->data['current']['type'];
-        $messageText = match ($event) {
-            0 => "Создана новая задача $id и с именем $name",
-            default => "статус задачи неизвестен"
-        };
 
-        return $messageText;
+        if ($this->data['current']['created_date'] === $this->data['current']['updated_date']) {
+            return "✅ **Создана новая задача:** #$id\n📝 $name";
+        } else {
+            return "🔄 **Обновлена задача:** #$id\n📝 $name";
+        }
 
     }
 }
