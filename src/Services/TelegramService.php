@@ -20,12 +20,12 @@ public function __construct() {
     $this->token = $_ENV['BOT_TOKEN'];
 }
 
-public function sendMessage(string $message) {
+public function sendMessage(string $chatId, string $text) {
     try {
         $responce = $this->client->post("https://api.telegram.org/bot{$this->token}/sendMessage", [
             'form_params' => [
-                'chat_id' => $this->chatId,
-                'text' => $message,
+                'chat_id' => $chatId,
+                'text' => $text,
                 'parse_mode' => 'Markdown'
             ]
         ]);

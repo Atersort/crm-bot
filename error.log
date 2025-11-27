@@ -1,0 +1,12 @@
+Client error: `POST https://api.telegram.org/bot7870383480:AAEeeIInbFy6jYUNCIpv3ghJvwrvErSXjMU/sendMessage` resulted in a `400 Bad Request` response:
+{"ok":false,"error_code":400,"description":"Bad Request: message text is empty"}
+
+
+Client error: `POST https://api.telegram.org/bot7870383480:AAEeeIInbFy6jYUNCIpv3ghJvwrvErSXjMU/sendMessage` resulted in a `400 Bad Request` response:
+{"ok":false,"error_code":400,"description":"Bad Request: message text is empty"}
+
+
+Client error: `POST https://api.telegram.org/bot7870383480:AAEeeIInbFy6jYUNCIpv3ghJvwrvErSXjMU/sendMessage` resulted in a `400 Bad Request` response:
+{"ok":false,"error_code":400,"description":"Bad Request: message text is empty"}
+
+

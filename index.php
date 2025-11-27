@@ -32,8 +32,8 @@ if ($_SERVER['REQUEST_URI'] === "/") {
 
     $handler = new \App\Handlers\CrmHandler($requestBody);
     $telegram = new \App\Services\TelegramService();
-    $messageText = $handler->handle();
-    $telegram->sendMessage($messageText);
+    $messageArray = $handler->handle();
+    $telegram->sendMessage($messageArray['chat_id'], $messageArray['text']);
 
 
     echo "OK\n";
